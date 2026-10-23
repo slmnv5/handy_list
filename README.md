@@ -4,7 +4,7 @@
 
 In standard C, it is hard to make a generic list and usually it involves 'void*' pointers. This library uses **C Preprocessor Macros** instead of `void*` pointers. The macros generate custom node structures at compile time. It uses linked lists as they can grow and shrink dynamically at runtime, using memory only when needed.
 
-This approach ensures that list nodes hold exact data types, allowing the compiler to check types at compile tyme.
+This approach ensures that list nodes hold exact data types and check types at compile time.
 
 ### Runtime Void* Linked Lists vs. Macro-Generated Generic Linked Lists
 
