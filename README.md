@@ -17,12 +17,12 @@ This approach ensures that list nodes hold exact data types and check types at c
 
 
 
-### 🧪 Running Test Cases
+### Running Test Cases
 
 Script test.sh compiles and runs unit tests. File test.c has examples of how to use the library. 
 
 
-### 📦 How to Link Your Application
+### How to Link Your Application
 
 Include the header handy_list.h in your project. 
 To instantiate lists and see examples, refer to unit tests. 
