@@ -26,8 +26,7 @@ int main(void) {
   list_char_init(&list_char);
 
   report("New list has size of 0", list_char_size(&list_char) == 0);
-  report("Iterator has next on empty list is false",
-         !list_char_has_next(&list_char));
+  report("Iterator has next on empty list is false", !list_char_has_next(&list_char));
 
   list_char_add(&list_char, 'A');
   list_char_add(&list_char, 'B');
@@ -44,8 +43,7 @@ int main(void) {
     }
   }
   report("Test list order after add", matches_order);
-  report("Test end of list, has next is false",
-         !list_char_has_next(&list_char));
+  report("Test end of list, has next is false", !list_char_has_next(&list_char));
 
   list_char_free(&list_char);
   report("Size drops to 0 after free", list_char_size(&list_char) == 0);
@@ -68,8 +66,7 @@ int main(void) {
   report("Contains 20 is true", list_int_contains(&list_int, 20));
   list_int_delete(&list_int, 20);
   report("Size change after deletion", list_int_size(&list_int) == 2);
-  report("Contains 20 is false after deletion",
-         !list_int_contains(&list_int, 20));
+  report("Contains 20 is false after deletion", !list_int_contains(&list_int, 20));
 
   list_int_delete(&list_int, 30);
   report("Size change after deletion", list_int_size(&list_int) == 1);
@@ -99,8 +96,7 @@ int main(void) {
 
   list_string_add(&list_string, word1);
 
-  report("List locates element by value",
-         list_string_contains(&list_string, word2));
+  report("List locates element by value", list_string_contains(&list_string, word2));
 
   list_string_add(&list_string, "unique");
   list_string_add(&list_string, "payload");
@@ -160,8 +156,7 @@ int main(void) {
     list_int_get_next(&list_int);
   }
   list_int_reset_iter(&list_int);
-  report("Reset iterator returns back to the head item",
-         list_int_get_next(&list_int) == 99);
+  report("Reset iterator returns back to the head item", list_int_get_next(&list_int) == 99);
 
   list_int_free(&list_int);
   printf("\n");
