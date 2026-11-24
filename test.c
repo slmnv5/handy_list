@@ -181,8 +181,6 @@ int main(void) {
   list_long_free(&mass_list);
   printf("\n");
 
- 
-
   // -------------------------------------------------------------
   // TEST CASE 7: TESTING ADD_TAIL (FIFO ORDER)
   // -------------------------------------------------------------
@@ -223,7 +221,8 @@ int main(void) {
   bool p2 = list_long_pop_head(&pop_list, &second);
   bool p3 = list_long_pop_head(&pop_list, &out_val);
 
-  bool pop_ok = (p1 && first == 100) && (p2 && second == 200) && (!p3) && (list_long_size(&pop_list) == 0);
+  bool pop_ok =
+      (p1 && first == 100) && (p2 && second == 200) && (!p3) && (list_long_size(&pop_list) == 0);
   report("pop_head retrieves items in FIFO order and updates size to 0", pop_ok);
 
   // Verify NULL out pointer works safely
@@ -257,8 +256,7 @@ int main(void) {
   list_long_free(&iter_pop_list);
   printf("\n");
 
-
-    // -------------------------------------------------------------
+  // -------------------------------------------------------------
   // TEST CASE 10: TESTING POP_TAIL (LIFO ORDER & EDGE CASES)
   // -------------------------------------------------------------
   printf("--- Test Case 10: Testing Pop Tail ---\n");
@@ -284,7 +282,8 @@ int main(void) {
   report("pop_tail retrieves items in reverse order and updates size to 0", pop_tail_ok);
 
   list_long_add_tail(&tail_pop_list, 999);
-  bool null_tail_ok = list_long_pop_tail(&tail_pop_list, NULL) && (list_long_size(&tail_pop_list) == 0);
+  bool null_tail_ok =
+      list_long_pop_tail(&tail_pop_list, NULL) && (list_long_size(&tail_pop_list) == 0);
   report("pop_tail handles NULL output pointer safely", null_tail_ok);
 
   list_long_free(&tail_pop_list);
@@ -317,4 +316,3 @@ int main(void) {
 
   return 0;
 }
-

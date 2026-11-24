@@ -27,8 +27,8 @@
     list->size = 0;                                                                                \
   }
 
-#define DEFINE_LIST_ADD_HEAD(type, name)                                                                \
-  static inline bool FN(name, add_head)(LIST_TYPE(name) * list, type value) {                           \
+#define DEFINE_LIST_ADD_HEAD(type, name)                                                           \
+  static inline bool FN(name, add_head)(LIST_TYPE(name) * list, type value) {                      \
     NODE_TYPE(name) *n = (NODE_TYPE(name) *)malloc(sizeof(NODE_TYPE(name)));                       \
     if (!n) return false;                                                                          \
     n->data = value;                                                                               \
@@ -37,7 +37,6 @@
     list->size++;                                                                                  \
     return true;                                                                                   \
   }
-
 
 #define DEFINE_LIST_ADD_TAIL(type, name)                                                           \
   static inline bool FN(name, add_tail)(LIST_TYPE(name) * list, type value) {                      \
@@ -49,7 +48,8 @@
       list->head = n;                                                                              \
     } else {                                                                                       \
       NODE_TYPE(name) *curr = list->head;                                                          \
-      while (curr->next != NULL) curr = curr->next;                                                \
+      while (curr->next != NULL)                                                                   \
+        curr = curr->next;                                                                         \
       curr->next = n;                                                                              \
     }                                                                                              \
     list->size++;                                                                                  \
@@ -57,7 +57,7 @@
   }
 
 #define DEFINE_LIST_POP_HEAD(type, name)                                                           \
-  static inline bool FN(name, pop_head)(LIST_TYPE(name) * list, type *out) {                       \
+  static inline bool FN(name, pop_head)(LIST_TYPE(name) * list, type * out) {                      \
     if (list->head == NULL) return false;                                                          \
     NODE_TYPE(name) *n = list->head;                                                               \
     if (out) *out = n->data;                                                                       \
@@ -68,8 +68,8 @@
     return true;                                                                                   \
   }
 
-  #define DEFINE_LIST_POP_TAIL(type, name)                                                           \
-  static inline bool FN(name, pop_tail)(LIST_TYPE(name) * list, type *out) {                       \
+#define DEFINE_LIST_POP_TAIL(type, name)                                                           \
+  static inline bool FN(name, pop_tail)(LIST_TYPE(name) * list, type * out) {                      \
     if (list->head == NULL) return false;                                                          \
     NODE_TYPE(name) *curr = list->head;                                                            \
     NODE_TYPE(name) *prev = NULL;                                                                  \
@@ -89,15 +89,13 @@
     return true;                                                                                   \
   }
 
-
-
-#define DEFINE_LIST_DELETE(type, name, compare)                                                       \
+#define DEFINE_LIST_DELETE(type, name, compare)                                                    \
   static inline bool FN(name, delete)(LIST_TYPE(name) * list, type value) {                        \
     NODE_TYPE(name) *n = list->head, *prev = NULL;                                                 \
     while (n != NULL) {                                                                            \
       type a = n->data;                                                                            \
       type b = value;                                                                              \
-      if (compare) {                                                                                  \
+      if (compare) {                                                                               \
         if (prev == NULL)                                                                          \
           list->head = n->next;                                                                    \
         else                                                                                       \
@@ -113,13 +111,13 @@
     return false;                                                                                  \
   }
 
-#define DEFINE_LIST_CONTAINS(type, name, compare)                                                     \
+#define DEFINE_LIST_CONTAINS(type, name, compare)                                                  \
   static inline bool FN(name, contains)(LIST_TYPE(name) * list, type value) {                      \
     NODE_TYPE(name) *n = list->head;                                                               \
     while (n != NULL) {                                                                            \
       type a = n->data;                                                                            \
       type b = value;                                                                              \
-      if (compare) return true;                                                                       \
+      if (compare) return true;                                                                    \
       n = n->next;                                                                                 \
     }                                                                                              \
     return false;                                                                                  \
@@ -161,15 +159,15 @@
     list->size = 0;                                                                                \
   }
 
-#define DEFINE_LIST(type, name, compare)                                                              \
+#define DEFINE_LIST(type, name, compare)                                                           \
   DECLARE_LIST(type, name)                                                                         \
   DEFINE_LIST_INIT(type, name)                                                                     \
-  DEFINE_LIST_ADD_HEAD(type, name)                                                                      \
+  DEFINE_LIST_ADD_HEAD(type, name)                                                                 \
   DEFINE_LIST_ADD_TAIL(type, name)                                                                 \
   DEFINE_LIST_POP_HEAD(type, name)                                                                 \
   DEFINE_LIST_POP_TAIL(type, name)                                                                 \
-  DEFINE_LIST_DELETE(type, name, compare)                                                             \
-  DEFINE_LIST_CONTAINS(type, name, compare)                                                           \
+  DEFINE_LIST_DELETE(type, name, compare)                                                          \
+  DEFINE_LIST_CONTAINS(type, name, compare)                                                        \
   DEFINE_LIST_SIZE(type, name)                                                                     \
   DEFINE_LIST_HAS_NEXT(type, name)                                                                 \
   DEFINE_LIST_GET_NEXT(type, name)                                                                 \
